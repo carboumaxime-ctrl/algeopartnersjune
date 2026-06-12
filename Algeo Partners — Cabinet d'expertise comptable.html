@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algeo Partners — Cabinet d'expertise comptable</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --kaki-deep: #2a2620;
+    --kaki: #3d3630;
+    --kaki-light: #6b6058;
+    --brun: #8b5e3c;
+    --brun-dark: #7a5234;
+    --creme: #d4c9b0;
+    --creme-light: #ede8dc;
+    --marine: #1e1a16;
+    --blanc: #f8f6f2;
+    --blanc-pur: #ffffff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--blanc);
+    color: var(--marine);
+    overflow-x: hidden;
+  }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--blanc); }
+  ::-webkit-scrollbar-thumb { background: var(--kaki-light); }
+
+  /* ── NAVIGATION ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: var(--kaki-deep);
+    padding: 0 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    border-bottom: 1px solid rgba(212,201,176,0.08);
+    transition: box-shadow 0.3s;
+  }
+  nav.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.25); }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 21px;
+    color: var(--creme);
+    letter-spacing: 0.06em;
+    text-decoration: none;
+  }
+  .nav-logo span { font-weight: 500; }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--creme);
+    opacity: 0.6;
+    text-decoration: none;
+    transition: opacity 0.2s;
+    padding-bottom: 3px;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav-links a.active {
+    opacity: 1;
+    border-bottom: 1px solid var(--brun);
+  }
+
+  .nav-cta {
+    background: var(--brun);
+    color: var(--blanc);
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    border: none;
+    padding: 11px 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--brun-dark); }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--creme);
+    transition: all 0.3s;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--kaki-deep);
+    padding: 160px 60px 100px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-decor {
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 500px; height: 500px;
+    border: 1px solid rgba(212,201,176,0.06);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-decor::after {
+    content: '';
+    position: absolute;
+    top: 60px; left: 60px; right: 60px; bottom: 60px;
+    border: 1px solid rgba(212,201,176,0.04);
+    border-radius: 50%;
+  }
+  .hero-line {
+    position: absolute;
+    bottom: 0; left: 60px;
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--brun));
+    opacity: 0.5;
+  }
+
+  .hero-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--brun);
+    margin-bottom: 32px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(42px, 6vw, 68px);
+    line-height: 1.05;
+    color: var(--creme);
+    max-width: 680px;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.35s forwards;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--creme);
+    opacity: 0.8;
+  }
+
+  .hero-sub {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--creme);
+    opacity: 0;
+    max-width: 520px;
+    margin-bottom: 48px;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+  .hero-sub-inner { opacity: 0.65; }
+
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.65s forwards;
+  }
+
+  .btn-primary {
+    background: var(--brun);
+    color: var(--blanc);
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    border: none;
+    padding: 15px 32px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--brun-dark); transform: translateY(-1px); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--creme);
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    border: 1px solid rgba(212,201,176,0.3);
+    padding: 14px 32px;
+    cursor: pointer;
+    transition: border-color 0.2s, opacity 0.2s;
+  }
+  .btn-secondary:hover { border-color: rgba(212,201,176,0.7); }
+
+  .hero-stats {
+    display: flex;
+    gap: 56px;
+    margin-top: 80px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(212,201,176,0.1);
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 48px;
+    color: var(--creme);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--kaki-light);
+    margin-top: 8px;
+  }
+
+  /* ── SECTION COMMUNE ── */
+  .section-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--brun);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3.5vw, 40px);
+    line-height: 1.15;
+    color: var(--kaki-deep);
+  }
+
+  /* ── PROMESSES ── */
+  .promises {
+    padding: 100px 60px;
+    background: var(--blanc);
+  }
+  .promises-header {
+    max-width: 480px;
+    margin-bottom: 56px;
+  }
+  .promises-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--creme-light);
+  }
+  .promise-card {
+    background: var(--blanc);
+    padding: 48px 44px;
+    transition: background 0.25s;
+    cursor: default;
+  }
+  .promise-card:hover { background: var(--creme-light); }
+  .promise-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 13px;
+    letter-spacing: 0.25em;
+    color: var(--brun);
+    margin-bottom: 14px;
+  }
+  .promise-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 22px;
+    color: var(--kaki-deep);
+    margin-bottom: 14px;
+  }
+  .promise-text {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--kaki);
+  }
+
+  /* ── SERVICES ── */
+  .services {
+    padding: 100px 60px;
+    background: var(--kaki-deep);
+  }
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 52px;
+  }
+  .services-header .section-title { color: var(--creme); }
+  .services-more {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--creme);
+    opacity: 0.45;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(212,201,176,0.2);
+    padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+  .services-more:hover { opacity: 0.8; }
+
+  .services-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(212,201,176,0.08);
+  }
+  .service-item {
+    background: var(--kaki-deep);
+    padding: 44px 40px;
+    border-left: 2px solid transparent;
+    transition: background 0.25s, border-color 0.25s;
+    cursor: default;
+  }
+  .service-item:hover {
+    background: #332e29;
+    border-left-color: var(--brun);
+  }
+  .service-tag {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--brun);
+    margin-bottom: 20px;
+  }
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 24px;
+    color: var(--creme);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .service-desc {
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--creme);
+    opacity: 0.55;
+  }
+
+  /* ── APPROCHE ── */
+  .approach {
+    padding: 100px 60px;
+    background: var(--creme-light);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .approach-steps {
+    margin-top: 44px;
+  }
+  .step {
+    display: flex;
+    gap: 32px;
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(74,82,64,0.1);
+    transition: padding-left 0.25s;
+  }
+  .step:last-child { border-bottom: none; }
+  .step:hover { padding-left: 8px; }
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 36px;
+    color: var(--brun);
+    min-width: 40px;
+    line-height: 1;
+    margin-top: 2px;
+  }
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: var(--kaki-deep);
+    margin-bottom: 8px;
+  }
+  .step-text {
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 1.75;
+    color: var(--kaki);
+  }
+  .approach-visual {
+    background: var(--kaki-deep);
+    padding: 56px 48px;
+    position: relative;
+  }
+  .approach-visual::before {
+    content: '';
+    position: absolute;
+    top: 16px; left: 16px; right: 16px; bottom: 16px;
+    border: 1px solid rgba(212,201,176,0.06);
+    pointer-events: none;
+  }
+  .quote-mark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    color: var(--brun);
+    line-height: 0.5;
+    margin-bottom: 20px;
+    display: block;
+    opacity: 0.7;
+  }
+  .quote-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 1.5;
+    color: var(--creme);
+  }
+  .quote-author {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--brun);
+    margin-top: 28px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(212,201,176,0.12);
+  }
+
+  /* ── FORFAITS ── */
+  .forfaits {
+    padding: 100px 60px;
+    background: var(--blanc);
+  }
+  .forfaits-header { margin-bottom: 56px; }
+  .forfaits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--creme-light);
+  }
+  .forfait {
+    background: var(--blanc);
+    padding: 52px 40px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .forfait.featured { background: var(--kaki-deep); }
+  .badge-featured {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: var(--brun);
+    color: var(--blanc);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+  }
+  .forfait-tag {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--brun);
+    margin-bottom: 16px;
+  }
+  .forfait-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 26px;
+    color: var(--kaki-deep);
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .forfait.featured .forfait-name { color: var(--creme); }
+  .forfait-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 40px;
+    color: var(--kaki-deep);
+    line-height: 1;
+  }
+  .forfait.featured .forfait-price { color: var(--creme); }
+  .forfait-period {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--kaki-light);
+    margin-bottom: 36px;
+    margin-top: 4px;
+  }
+  .forfait.featured .forfait-period { color: rgba(212,201,176,0.5); }
+  .forfait-sep {
+    width: 32px;
+    height: 1px;
+    background: var(--brun);
+    opacity: 0.4;
+    margin-bottom: 28px;
+  }
+  .forfait-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    margin-bottom: 40px;
+    flex: 1;
+  }
+  .forfait-features li {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--kaki);
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.5;
+  }
+  .forfait.featured .forfait-features li { color: var(--creme); opacity: 0.8; }
+  .check {
+    width: 16px;
+    height: 16px;
+    min-width: 16px;
+    border: 1px solid var(--brun);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+    flex-shrink: 0;
+  }
+  .check::after {
+    content: '';
+    width: 6px;
+    height: 6px;
+    background: var(--brun);
+    display: block;
+  }
+  .forfait-btn {
+    width: 100%;
+    padding: 14px;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 1px solid var(--kaki-light);
+    background: transparent;
+    color: var(--kaki);
+  }
+  .forfait-btn:hover {
+    background: var(--kaki-deep);
+    color: var(--creme);
+    border-color: var(--kaki-deep);
+  }
+  .forfait.featured .forfait-btn {
+    border-color: var(--brun);
+    background: var(--brun);
+    color: var(--blanc);
+  }
+  .forfait.featured .forfait-btn:hover { background: var(--brun-dark); }
+
+  /* ── TEMOIGNAGES ── */
+  .testimonials {
+    padding: 100px 60px;
+    background: var(--kaki);
+  }
+  .testimonials .section-title { color: var(--creme); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-top: 52px;
+    background: rgba(212,201,176,0.08);
+  }
+  .testi-card {
+    background: var(--kaki);
+    padding: 44px 40px;
+    transition: background 0.2s;
+  }
+  .testi-card:hover { background: #4a4239; }
+  .testi-stars {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 24px;
+  }
+  .testi-star {
+    width: 6px;
+    height: 6px;
+    background: var(--brun);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  }
+  .testi-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--creme);
+    margin-bottom: 28px;
+    opacity: 0.9;
+  }
+  .testi-author {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--brun);
+  }
+  .testi-role {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--creme);
+    opacity: 0.45;
+    margin-top: 4px;
+  }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    background: var(--brun);
+    padding: 72px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+  .cta-band-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-style: italic;
+    font-size: clamp(22px, 2.5vw, 30px);
+    color: var(--blanc);
+    max-width: 520px;
+    line-height: 1.4;
+  }
+  .cta-band-btn {
+    background: var(--blanc);
+    color: var(--brun);
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    border: none;
+    padding: 18px 36px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s, transform 0.15s;
+    flex-shrink: 0;
+  }
+  .cta-band-btn:hover { background: var(--creme-light); transform: translateY(-1px); }
+
+  /* ── CONTACT ── */
+  .contact {
+    padding: 100px 60px;
+    background: var(--blanc);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact-info { }
+  .contact-detail {
+    margin-top: 44px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+  .contact-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--creme);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--kaki);
+  }
+  .contact-icon svg {
+    width: 18px;
+    height: 18px;
+    stroke: var(--kaki);
+    fill: none;
+    stroke-width: 1.5;
+  }
+  .contact-item-label {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--brun);
+    margin-bottom: 4px;
+  }
+  .contact-item-value {
+    font-weight: 300;
+    font-size: 15px;
+    color: var(--kaki-deep);
+  }
+
+  .contact-form { }
+  .form-group { margin-bottom: 24px; }
+  .form-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--kaki-light);
+    margin-bottom: 8px;
+  }
+  .form-input,
+  .form-select,
+  .form-textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--creme);
+    padding: 10px 0;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--kaki-deep);
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+  }
+  .form-input:focus,
+  .form-select:focus,
+  .form-textarea:focus { border-bottom-color: var(--brun); }
+  .form-textarea { resize: vertical; min-height: 80px; }
+  .form-submit {
+    background: var(--kaki-deep);
+    color: var(--creme);
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    border: none;
+    padding: 15px 36px;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 12px;
+  }
+  .form-submit:hover { background: var(--kaki); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--kaki-deep);
+    padding: 60px;
+    border-top: 1px solid rgba(212,201,176,0.08);
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(212,201,176,0.08);
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 22px;
+    color: var(--creme);
+    letter-spacing: 0.06em;
+  }
+  .footer-logo span { font-weight: 500; }
+  .footer-logo-sub {
+    font-size: 11px;
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--creme);
+    opacity: 0.3;
+    margin-top: 6px;
+  }
+  .footer-col-title {
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--brun);
+    margin-bottom: 20px;
+  }
+  .footer-links-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-links-list a {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--creme);
+    opacity: 0.5;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+  .footer-links-list a:hover { opacity: 1; }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-mention {
+    font-size: 11px;
+    font-weight: 300;
+    color: var(--creme);
+    opacity: 0.25;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .footer-ordre {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--creme);
+    opacity: 0.35;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 28px; }
+    .nav-links, .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+
+    .hero { padding: 120px 28px 80px; }
+    .hero-stats { gap: 28px; flex-wrap: wrap; }
+
+    .promises, .services, .approach, .forfaits,
+    .testimonials, .cta-band, .contact { padding: 64px 28px; }
+
+    .promises-grid, .services-list,
+    .forfaits-grid, .testimonials-grid { grid-template-columns: 1fr; }
+
+    .approach { grid-template-columns: 1fr; gap: 48px; }
+    .contact  { grid-template-columns: 1fr; gap: 48px; }
+    .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .cta-band { flex-direction: column; align-items: flex-start; }
+    .footer-top { flex-direction: column; gap: 40px; }
+    footer { padding: 48px 28px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">Algeo <span>Partners</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Expertise</a></li>
+    <li><a href="index.html" class="active">Dirigeants</a></li>
+    <li><a href="solutions.html">Nos Solutions</a></li>
+    <li><a href="#services">Conseil</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Prendre RDV</button>
+  <button class="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-decor"></div>
+  <div class="hero-line"></div>
+  <div class="hero-label">Pour les dirigeants · TPE &amp; PME</div>
+  <h1>Vos chiffres,<br><em>enfin</em> sous contrôle.</h1>
+  <p class="hero-sub"><span class="hero-sub-inner">Un accompagnement comptable et fiscal sur mesure, conçu pour les dirigeants qui veulent décider avec clarté — pas subir leurs chiffres.</span></p>
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Prendre rendez-vous</button>
+    <button class="btn-secondary" onclick="document.getElementById('forfaits').scrollIntoView({behavior:'smooth'})">Découvrir nos forfaits</button>
+  </div>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num">30+</div>
+      <div class="stat-label">Années d'expérience</div>
+    </div>
+    <div>
+      <div class="stat-num">120</div>
+      <div class="stat-label">Dirigeants accompagnés</div>
+    </div>
+    <div>
+      <div class="stat-num">98%</div>
+      <div class="stat-label">Clients satisfaits</div>
+    </div>
+    <div>
+      <div class="stat-num">48h</div>
+      <div class="stat-label">Délai de réponse max.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMESSES -->
+<section class="promises" id="promesses">
+  <div class="promises-header reveal">
+    <div class="section-label">Notre engagement</div>
+    <div class="section-title">Ce que vous êtes en droit<br>d'attendre de nous</div>
+  </div>
+  <div class="promises-grid">
+    <div class="promise-card reveal">
+      <div class="promise-num">01</div>
+      <div class="promise-title">Réactivité garantie</div>
+      <p class="promise-text">Chaque question mérite une réponse rapide. Nous nous engageons à vous répondre sous 48h, sans exception, pour que votre activité ne soit jamais bloquée.</p>
+    </div>
+    <div class="promise-card reveal">
+      <div class="promise-num">02</div>
+      <div class="promise-title">Interlocuteur unique</div>
+      <p class="promise-text">Vous n'expliquez pas deux fois. Un expert dédié suit votre dossier, connaît votre contexte, et vous accompagne dans la durée avec cohérence.</p>
+    </div>
+    <div class="promise-card reveal">
+      <div class="promise-num">03</div>
+      <div class="promise-title">Transparence totale</div>
+      <p class="promise-text">Pas de surprises en fin de mission. Nos forfaits sont clairs, nos honoraires fixés à l'avance, et notre travail vous est présenté avec pédagogie.</p>
+    </div>
+    <div class="promise-card reveal">
+      <div class="promise-num">04</div>
+      <div class="promise-title">Vision stratégique</div>
+      <p class="promise-text">Au-delà de la conformité, nous vous aidons à lire vos chiffres pour prendre de meilleures décisions — rémunération, investissement, croissance.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <div>
+      <div class="section-label">Nos domaines</div>
+      <div class="section-title">Une expertise complète<br>à votre service</div>
+    </div>
+    <a href="#contact" class="services-more">Toutes les missions ↗</a>
+  </div>
+  <div class="services-list">
+    <div class="service-item reveal">
+      <div class="service-tag">Comptabilité</div>
+      <div class="service-name">Tenue &amp; révision des comptes</div>
+      <p class="service-desc">Saisie, lettrage, rapprochements, établissement des bilans et situations intermédiaires. Rigueur et ponctualité.</p>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-tag">Fiscal</div>
+      <div class="service-name">Optimisation &amp; conformité fiscale</div>
+      <p class="service-desc">Déclarations IS, TVA, liasse fiscale. Anticipation des échéances et optimisation de votre charge fiscale personnelle et professionnelle.</p>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-tag">Social</div>
+      <div class="service-name">Paie &amp; gestion sociale</div>
+      <p class="service-desc">Bulletins de paie, charges sociales, DSN et conseil sur les statuts dirigeants. Zéro erreur, zéro retard.</p>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-tag">Reporting</div>
+      <div class="service-name">Tableaux de bord dirigeant</div>
+      <p class="service-desc">Indicateurs clés, trésorerie prévisionnelle et analyse mensuelle pour piloter votre activité en temps réel.</p>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-tag">Conseil</div>
+      <div class="service-name">Stratégie &amp; développement</div>
+      <p class="service-desc">Choix de structure, rémunération optimale, cession ou transmission : nous vous éclairons aux moments qui comptent.</p>
+    </div>
+    <div class="service-item reveal">
+      <div class="service-tag">Juridique</div>
+      <div class="service-name">Secrétariat juridique</div>
+      <p class="service-desc">Assemblées générales, modifications statutaires, dépôt des comptes. Vos obligations légales, sans la charge administrative.</p>
+    </div>
+  </div>
+</section>
+
+<!-- APPROCHE -->
+<section class="approach" id="approche">
+  <div>
+    <div class="reveal">
+      <div class="section-label">Notre méthode</div>
+      <div class="section-title">Un accompagnement<br>structuré, de A à Z</div>
+    </div>
+    <div class="approach-steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Diagnostic initial</div>
+          <p class="step-text">Un premier entretien pour comprendre votre activité, vos enjeux et vos objectifs. Sans engagement, sans jargon.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">Proposition sur mesure</div>
+          <p class="step-text">Nous construisons une lettre de mission adaptée à votre situation réelle — pas un forfait générique.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Suivi continu</div>
+          <p class="step-text">Points réguliers, accès à vos données, alertes proactives. Vous n'êtes jamais seul face à vos obligations.</p>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">Conseil stratégique</div>
+          <p class="step-text">À chaque étape clé, nous anticipons et vous orientons pour que la comptabilité devienne un levier, pas une contrainte.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="approach-visual reveal">
+    <span class="quote-mark">"</span>
+    <p class="quote-text">La confiance se construit dans la durée, avec exigence et transparence.</p>
+    <div class="quote-author">Algeo Partners — Notre engagement</div>
+  </div>
+</section>
+
+<!-- FORFAITS -->
+<section class="forfaits" id="forfaits">
+  <div class="forfaits-header reveal">
+    <div class="section-label">Tarification</div>
+    <div class="section-title">Des forfaits clairs,<br>sans mauvaise surprise</div>
+  </div>
+  <div class="forfaits-grid">
+    <div class="forfait reveal">
+      <div class="forfait-tag">Essentiel</div>
+      <div class="forfait-name">Tenue &amp; conformité</div>
+      <div class="forfait-price">À partir de 290 €</div>
+      <div class="forfait-period">/ mois · HT · engagement annuel</div>
+      <div class="forfait-sep"></div>
+      <ul class="forfait-features">
+        <li><span class="check"></span>Saisie comptable mensuelle</li>
+        <li><span class="check"></span>Bilan &amp; liasse fiscale annuels</li>
+        <li><span class="check"></span>Déclarations TVA</li>
+        <li><span class="check"></span>Accès espace client digital</li>
+        <li><span class="check"></span>Réponse sous 48h garantie</li>
+      </ul>
+      <button class="forfait-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Demander un devis</button>
+    </div>
+    <div class="forfait featured reveal">
+      <div class="badge-featured">Le plus choisi</div>
+      <div class="forfait-tag">Confort</div>
+      <div class="forfait-name">Pilotage dirigeant</div>
+      <div class="forfait-price">À partir de 490 €</div>
+      <div class="forfait-period">/ mois · HT · engagement annuel</div>
+      <div class="forfait-sep"></div>
+      <ul class="forfait-features">
+        <li><span class="check"></span>Tout l'essentiel inclus</li>
+        <li><span class="check"></span>Tableau de bord mensuel</li>
+        <li><span class="check"></span>Gestion paie (jusqu'à 3 sal.)</li>
+        <li><span class="check"></span>Réunion trimestrielle dédiée</li>
+        <li><span class="check"></span>Conseil fiscal illimité</li>
+      </ul>
+      <button class="forfait-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Prendre rendez-vous</button>
+    </div>
+    <div class="forfait reveal">
+      <div class="forfait-tag">Premium</div>
+      <div class="forfait-name">Direction financière externalisée</div>
+      <div class="forfait-price">Sur devis</div>
+      <div class="forfait-period">/ mois · HT · adapté à votre structure</div>
+      <div class="forfait-sep"></div>
+      <ul class="forfait-features">
+        <li><span class="check"></span>Tout le Confort inclus</li>
+        <li><span class="check"></span>Prévisionnel &amp; business plan</li>
+        <li><span class="check"></span>Accompagnement levées de fonds</li>
+        <li><span class="check"></span>Suivi hebdomadaire dédié</li>
+        <li><span class="check"></span>Partenariats juridiques inclus</li>
+      </ul>
+      <button class="forfait-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Nous contacter</button>
+    </div>
+  </div>
+</section>
+
+<!-- TÉMOIGNAGES -->
+<section class="testimonials">
+  <div class="reveal">
+    <div class="section-label">Ils nous font confiance</div>
+    <div class="section-title" style="color:var(--creme)">Ce que disent<br>nos dirigeants</div>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">
+        <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
+        <div class="testi-star"></div><div class="testi-star"></div>
+      </div>
+      <p class="testi-text">« Enfin un expert-comptable qui anticipe et ne se contente pas de constater. Algeo Partners a transformé ma lecture des chiffres. »</p>
+      <div class="testi-author">Marc D.</div>
+      <div class="testi-role">Dirigeant, agence de communication — Paris</div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">
+        <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
+        <div class="testi-star"></div><div class="testi-star"></div>
+      </div>
+      <p class="testi-text">« Réactivité exemplaire, interlocuteur unique, et une vraie pédagogie. Je comprends enfin ce que je signe. »</p>
+      <div class="testi-author">Sophie M.</div>
+      <div class="testi-role">Gérante, cabinet de conseil RH — Lyon</div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">
+        <div class="testi-star"></div><div class="testi-star"></div><div class="testi-star"></div>
+        <div class="testi-star"></div><div class="testi-star"></div>
+      </div>
+      <p class="testi-text">« L'accompagnement sur ma cession m'a économisé un temps précieux et sécurisé l'opération. Je recommande sans hésitation. »</p>
+      <div class="testi-author">Thomas B.</div>
+      <div class="testi-role">Fondateur, tech startup — Marseille</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<div class="cta-band">
+  <p class="cta-band-text">Prêt à reprendre le contrôle de vos finances ? Parlons-en dès maintenant.</p>
+  <button class="cta-band-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Prendre rendez-vous →</button>
+</div>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div>
+    <div class="section-label">Nous écrire</div>
+    <div class="section-title">Commençons<br>par un échange</div>
+    <div class="contact-detail">
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">Adresse</div>
+          <div class="contact-item-value">68 chemin du Vallon de Toulouse<br>13009 Marseille</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.95 9.99 19.79 19.79 0 01.88 1.38 2 2 0 012.88 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">Téléphone</div>
+          <div class="contact-item-value">06 49 50 82 21</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="contact-item-label">Email</div>
+          <div class="contact-item-value">contact@algeopartners.fr</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form reveal">
+    <div class="form-group">
+      <label class="form-label">Nom complet</label>
+      <input type="text" id="contact-nom" class="form-input" placeholder="Marie Dupont">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email professionnel</label>
+      <input type="email" id="contact-email" class="form-input" placeholder="marie@entreprise.fr">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Votre situation</label>
+      <select id="contact-situation" class="form-select">
+        <option value="">Sélectionner...</option>
+        <option>Dirigeant TPE / PME</option>
+        <option>Indépendant / Freelance</option>
+        <option>Création d'entreprise</option>
+        <option>Cession / Transmission</option>
+        <option>Autre</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Votre message</label>
+      <textarea id="contact-message" class="form-textarea" placeholder="Décrivez votre besoin..."></textarea>
+    </div>
+    <button class="form-submit" onclick="envoyerEmail()">Envoyer la demande →</button>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">Algeo <span>Partners</span></div>
+      <div class="footer-logo-sub">Expertise comptable · Inscrit à l'Ordre</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links-list">
+        <li><a href="#">Expertise comptable</a></li>
+        <li><a href="#">Audit</a></li>
+        <li><a href="#">Conseil fiscal</a></li>
+        <li><a href="#">Gestion sociale</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Cabinet</div>
+      <ul class="footer-links-list">
+        <li><a href="#">Notre équipe</a></li>
+        <li><a href="#">Nos valeurs</a></li>
+        <li><a href="#">Rejoindre Algeo</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Contact</div>
+      <ul class="footer-links-list">
+        <li><a href="#">Prendre rendez-vous</a></li>
+        <li><a href="#">Espace client</a></li>
+        <li><a href="#">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-mention">© 2025 Algeo Partners — Tous droits réservés</div>
+    <div class="footer-ordre">Membre de l'Ordre des Experts-Comptables</div>
+    <div class="footer-mention">Mentions légales · Confidentialité</div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => io.observe(el));
+
+  // Formulaire de contact
+  function envoyerEmail() {
+    const nom       = document.getElementById('contact-nom').value.trim();
+    const email     = document.getElementById('contact-email').value.trim();
+    const situation = document.getElementById('contact-situation').value;
+    const message   = document.getElementById('contact-message').value.trim();
+
+    if (!nom || !email || !message) {
+      alert('Merci de renseigner votre nom, votre email et votre message.');
+      return;
+    }
+
+    const sujet = 'Demande de contact – ' + (situation || 'Algeo Partners');
+    const corps = 'Nom : ' + nom
+      + '\nEmail : ' + email
+      + '\nSituation : ' + (situation || 'Non précisée')
+      + '\n\nMessage :\n' + message;
+
+    window.location.href = 'mailto:contact@algeopartners.fr'
+      + '?subject=' + encodeURIComponent(sujet)
+      + '&body='    + encodeURIComponent(corps);
+  }
+</script>
+</body>
+</html>
