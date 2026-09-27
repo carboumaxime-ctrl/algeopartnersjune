@@ -81,8 +81,13 @@ nav.main-nav a:hover{opacity:1;}
 
 /* ---------- hero (accueil) ---------- */
 .hero{
-  position:relative;aspect-ratio:1129/553;max-height:82vh;min-height:460px;
-  display:flex;align-items:flex-end;overflow:hidden;
+  position:relative;
+  width:100%;
+  height:min(82vh, 680px);
+  min-height:460px;
+  display:flex;
+  align-items:flex-end;
+  overflow:hidden;
 }
 .hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;}
 .hero-overlay{
@@ -327,7 +332,10 @@ footer .bottom a:hover{opacity:1;text-decoration:underline;}
   .estimator-options{grid-template-columns:1fr;}
   .teaser-actions{justify-content:flex-start;margin-top:16px;}
   .triptych,.stats .wrap,.method-grid,.pricing-grid,.testi-grid,footer .wrap{grid-template-columns:1fr;}
-  .hero{aspect-ratio:auto;min-height:420px;max-height:none;}
+.hero{
+  height:520px;
+  min-height:420px;
+}
   .hero-tagline{font-size:24px;}
   .hero-bottom{padding-bottom:28px;}
   .page-header{padding:130px 0 40px;}
