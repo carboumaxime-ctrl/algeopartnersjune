@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Outils pour les professionnels — Algeo Partners</title>
+  <meta name="description" content="Des outils pratiques proposés par Algeo Partners pour faciliter le suivi de votre activité professionnelle : indemnités kilométriques BNC et futurs simulateurs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" sizes="64x64" href="favicon.png">
+  <style>
+    .tools-page{background:#f7f2e8;min-height:70vh;padding:92px 0 110px;color:#183b37}
+    .tools-page .wrap{max-width:1140px;margin:auto;padding:0 24px}
+    .tools-kicker{display:block;letter-spacing:.15em;text-transform:uppercase;color:#ad822e;font-size:12px;font-weight:600;margin-bottom:18px}
+    .tools-title{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:clamp(42px,5.4vw,72px);line-height:1.08;letter-spacing:-.03em;max-width:820px;margin:0 0 20px}
+    .tools-title em{color:#bd8d35;font-style:italic}.tools-intro{font-size:16px;line-height:1.8;max-width:680px;color:#536763;margin:0 0 52px}
+    .tools-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.65fr);gap:22px}
+    .tool-card{background:#fff;border:1px solid #e9e2d4;border-radius:4px;padding:40px;display:flex;flex-direction:column;align-items:flex-start;min-height:330px;box-shadow:0 12px 32px #163a3010}
+    .tool-card.future{background:#eee9df;box-shadow:none}.tool-eyebrow{color:#b18535;text-transform:uppercase;letter-spacing:.12em;font-size:11px;font-weight:600;margin-bottom:26px}
+    .tool-card h2{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:34px;line-height:1.2;margin:0 0 15px;color:#173b37}.tool-card p{line-height:1.7;font-size:14px;color:#546966;margin:0 0 28px;max-width:520px}
+    .tool-button{margin-top:auto;background:#bb8c35;color:white!important;padding:13px 22px;text-decoration:none;border-radius:4px;font-size:13px;font-weight:600;display:inline-block}.tool-button:hover{background:#a77928}
+    .tool-card.future .tool-eyebrow{color:#6f7b73}.tool-card.future h2{font-size:29px}.tool-note{margin-top:32px;font-size:13px;line-height:1.7;color:#62716a;max-width:770px}
+    @media(max-width:800px){.tools-page{padding:60px 0 80px}.tools-grid{grid-template-columns:1fr}.tool-card{padding:28px;min-height:auto}.tool-card.future{min-height:200px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <a class="logo" href="index.html"><img src="algeo-logo.png" alt="Algeo Partners" class="logo-img"></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="cabinet.html">Le Cabinet</a>
+      <div class="has-dropdown">
+        <button class="dropdown-trigger" aria-expanded="false">Nos Spécialités <span class="chev">▾</span></button>
+        <div class="dropdown-menu"><div class="dropdown-menu-inner">
+          <a href="sante.html">Santé</a><a href="professions-liberales.html">Professions libérales</a><a href="independants-entrepreneurs.html">Indépendants et entrepreneurs</a><a href="immobilier.html">Professionnels de l'immobilier</a>
+        </div></div>
+      </div>
+      <div class="has-dropdown">
+        <button class="dropdown-trigger" aria-expanded="false">Nos offres <span class="chev">▾</span></button>
+        <div class="dropdown-menu"><div class="dropdown-menu-inner">
+          <a href="offres-sante.html">Santé</a><a href="offres-liberales.html">Professions libérales</a><a href="offres-independants.html">Indépendants et entrepreneurs</a><a href="offres-immobilier.html">Immobilier</a>
+        </div></div>
+      </div>
+      <a href="outils.html" aria-current="page">Outils</a>
+      <a href="index.html#actualite">Actualité</a><a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="header-ctas">
+      <a class="nav-cta-gold" href="https://app.pennylane.com/" target="_blank" rel="noopener">Connexion rapide</a>
+      <a class="nav-cta" href="index.html#contact">Prendre rendez-vous</a>
+    </div>
+    <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+  </div>
+</header>
+<main class="tools-page">
+  <div class="wrap">
+    <span class="tools-kicker">ALGEO Partners · Ressources pratiques</span>
+    <h1 class="tools-title">Des outils pour avancer <em>plus sereinement.</em></h1>
+    <p class="tools-intro">Retrouvez ici les outils mis à votre disposition par le cabinet pour suivre votre activité et préparer vos échanges avec nous.</p>
+    <div class="tools-grid">
+      <article class="tool-card">
+        <span class="tool-eyebrow">01 / Professions libérales · BNC</span>
+        <h2>Suivi des indemnités kilométriques</h2>
+        <p>Enregistrez vos déplacements professionnels, consultez le détail mensuel, puis signez et exportez votre relevé annuel avec le barème fiscal en annexe.</p>
+        <a class="tool-button" href="outil-indemnites-kilometriques.html">Ouvrir l’outil ↗</a>
+      </article>
+      <article class="tool-card future">
+        <span class="tool-eyebrow">À venir</span>
+        <h2>D’autres outils pour votre activité</h2>
+        <p>Cette rubrique s’enrichira progressivement de ressources adaptées aux professionnels accompagnés par le cabinet.</p>
+      </article>
+    </div>
+    <p class="tool-note">Le suivi kilométrique est une version de démonstration. Les données restent sur l’appareil utilisé. Après signature, enregistrez le relevé en PDF et joignez-le au brouillon d’email préparé par l’outil ; aucun envoi automatique n’a lieu. Le cabinet vérifie ensuite le traitement fiscal.</p>
+  </div>
+</main>
+<footer>
+  <img class="footer-bg" src="algeo-footer-bg.jpg" alt="Vue des calanques de Marseille"><div class="footer-overlay"></div>
+  <div class="wrap">
+    <div><div class="logo" style="margin-bottom:10px;">Algeo Partners</div><p style="font-size:13px;opacity:0.75;max-width:280px;">Cabinet d'expertise comptable — Membre de l'Ordre des Experts-Comptables.</p><img class="ec-badge" src="ec-paca.png" alt="Ordre des Experts-Comptables — Région Provence-Alpes-Côte d'Azur"></div>
+    <div><h5>Nos spécialités</h5><ul><li><a href="sante.html">Santé</a></li><li><a href="professions-liberales.html">Professions libérales</a></li><li><a href="independants-entrepreneurs.html">Indépendants et entrepreneurs</a></li><li><a href="immobilier.html">Professionnels de l'immobilier</a></li></ul></div>
+    <div><h5>Cabinet</h5><ul><li><a href="cabinet.html">Le Cabinet</a></li><li><a href="offres.html">Nos offres</a></li><li><a href="outils.html">Outils</a></li><li><a href="index.html#actualite">Actualité</a></li><li><a href="index.html#contact">Contact</a></li><li><a href="https://fr.linkedin.com/in/maximecarbou" target="_blank" rel="noopener">LinkedIn</a></li></ul></div>
+  </div>
+  <div class="wrap bottom"><span>© 2026 Algeo Partners — Tous droits réservés</span><span><a href="mentions-legales.html">Mentions légales</a> · <a href="politique-confidentialite.html">Politique de confidentialité</a></span></div>
+</footer>
+<script src="script.js"></script>
+</body>
+</html>
