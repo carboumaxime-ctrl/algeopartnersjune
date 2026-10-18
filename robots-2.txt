@@ -1,0 +1,7 @@
+# algeopartners.fr — exploration autorisée pour tous les robots respectant robots.txt.
+# Cette règle couvre notamment Googlebot, OAI-SearchBot et les autres robots de recherche.
+# Elle conserve aussi l’autorisation des robots d’entraînement du fichier initial.
+User-agent: *
+Allow: /
+
+Sitemap: https://algeopartners.fr/sitemap.xml
